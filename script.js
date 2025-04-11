@@ -1,25 +1,45 @@
-function getRandomSymbol() {
-    const symbols = ['🍒', '🍋', '🍊', '🍉', '🍇', '🍓'];
-    return symbols[Math.floor(Math.random() * symbols.length)];
-}
+document.getElementById('loveForm').addEventListener('submit', function(event) {
+  event.preventDefault();
 
-function spin() {
-    const reel1 = document.getElementById('reel1');
-    const reel2 = document.getElementById('reel2');
-    const reel3 = document.getElementById('reel3');
-    const message = document.getElementById('message');
+  const name1 = document.getElementById('name1').value.trim().toLowerCase();
+  const name2 = document.getElementById('name2').value.trim().toLowerCase();
 
-    const symbol1 = getRandomSymbol();
-    const symbol2 = getRandomSymbol();
-    const symbol3 = getRandomSymbol();
+  const specialPairs = [
+    { first: "amelia", second: "dominik" },
+    { first: "amelka", second: "dominik" },
+    { first: "amelcia", second: "dominik" }
+  ];
 
-    reel1.textContent = symbol1;
-    reel2.textContent = symbol2;
-    reel3.textContent = symbol3;
+  const badPairs = ["amelia", "amelka", "amelcia", "szymon"];
 
-    if (symbol1 === symbol2 && symbol2 === symbol3) {
-        message.textContent = 'Wygrana!';
+  let resultText;
+  const resultDiv = document.getElementById('result');
+
+  // Check for bad pairs
+  if (badPairs.includes(name1) || badPairs.includes(name2)) {
+    resultText = `Miłość między ${capitalize(name1)} i ${capitalize(name2)} wynosi 0%! 👎🏻👎🏻👎🏻`;
+    resultDiv.classList.add('shake'); // Add shake animation
+  } else {
+    // Check for special pairs
+    const isSpecialPair = specialPairs.some(pair =>
+      (pair.first === name1 && pair.second === name2) ||
+      (pair.first === name2 && pair.second === name1)
+    );
+
+    if (isSpecialPair) {
+      resultDiv.classList.remove('shake'); // Remove shake if present
+      resultText = `Miłość między ${capitalize(name1)} i ${capitalize(name2)} wynosi 100%! ❤️`;
     } else {
-        message.textContent = 'Spróbuj ponownie.';
+      resultDiv.classList.remove('shake'); // Remove shake if present
+      const randomPercentage = Math.floor(Math.random() * 101);
+      resultText = `Miłość między ${capitalize(name1)} i ${capitalize(name2)} wynosi ${randomPercentage}%.`;
     }
+  }
+
+  resultDiv.textContent = resultText;
+});
+
+// Capitalize the first letter of names
+function capitalize(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1);
 }
