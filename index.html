@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mObywatel Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container" id="formContainer">
+  <h1>Wprowadź swoje dane</h1>
+  <form id="dataForm">
+    <input type="text" id="name" placeholder="Imię i nazwisko" required>
+    <input type="text" id="pesel" placeholder="PESEL" required>
+    <input type="date" id="birthdate" placeholder="Data urodzenia" required>
+    <input type="text" id="citizenship" placeholder="Obywatelstwo" required>
+
+    <input type="text" id="idNumber" placeholder="Numer dowodu osobistego" required>
+    <input type="date" id="idValidUntil" placeholder="Ważność dowodu" required>
+    <input type="text" id="issuer" placeholder="Organ wydający" required>
+
+    <button type="submit">Generuj aplikację</button>
+  </form>
+</div>
+
+<div class="container" id="appContainer" style="display:none;">
+  <h1>mObywatel</h1>
+  <div class="buttons">
+    <button onclick="showSection('identity')">Tożsamość</button>
+    <button onclick="showSection('documents')">Dokumenty</button>
+    <button onclick="showSection('services')">Usługi</button>
+  </div>
+
+  <div class="content">
+    <div id="identity" class="section">
+      <h2>Tożsamość</h2>
+      <p><strong>Imię i nazwisko:</strong> <span id="displayName"></span></p>
+      <p><strong>PESEL:</strong> <span id="displayPesel"></span></p>
+      <p><strong>Data urodzenia:</strong> <span id="displayBirthdate"></span></p>
+      <p><strong>Obywatelstwo:</strong> <span id="displayCitizenship"></span></p>
+    </div>
+    <div id="documents" class="section">
+      <h2>Dowód osobisty</h2>
+      <p><strong>Numer:</strong> <span id="displayIdNumber"></span></p>
+      <p><strong>Ważny do:</strong> <span id="displayIdValidUntil"></span></p>
+      <p><strong>Organ wydający:</strong> <span id="displayIssuer"></span></p>
+    </div>
+    <div id="services" class="section">
+      <h2>Usługi</h2>
+      <ul>
+        <li>Sprawdź ważność dokumentów</li>
+        <li>Zgłoś utratę dokumentu</li>
+        <li>Sprawdź punkty karne</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
