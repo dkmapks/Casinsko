@@ -1,48 +1,40 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f0f2f5;
-  margin: 0;
-  padding: 20px;
-  text-align: center;
-}
+const form = document.getElementById('dataForm');
+const formContainer = document.getElementById('formContainer');
+const appContainer = document.getElementById('appContainer');
 
-.container {
-  max-width: 500px;
-  margin: auto;
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
 
-form input {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 12px;
-  font-size: 16px;
-}
+  // Pobranie danych
+  const name = document.getElementById('name').value;
+  const pesel = document.getElementById('pesel').value;
+  const birthdate = document.getElementById('birthdate').value;
+  const citizenship = document.getElementById('citizenship').value;
 
-button {
-  background: #0056b3;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 18px;
-  cursor: pointer;
-  margin-top: 10px;
-}
+  const idNumber = document.getElementById('idNumber').value;
+  const idValidUntil = document.getElementById('idValidUntil').value;
+  const issuer = document.getElementById('issuer').value;
 
-button:hover {
-  background: #003d80;
-}
+  // Wstawienie danych
+  document.getElementById('displayName').textContent = name;
+  document.getElementById('displayPesel').textContent = pesel;
+  document.getElementById('displayBirthdate').textContent = birthdate;
+  document.getElementById('displayCitizenship').textContent = citizenship;
+  document.getElementById('displayIdNumber').textContent = idNumber;
+  document.getElementById('displayIdValidUntil').textContent = idValidUntil;
+  document.getElementById('displayIssuer').textContent = issuer;
 
-.buttons button {
-  margin: 10px;
-}
+  // Pokazanie aplikacji
+  formContainer.style.display = 'none';
+  appContainer.style.display = 'block';
 
-.section {
-  display: none;
-  margin-top: 20px;
-  text-align: left;
+  // Domyślnie pokaż sekcję Tożsamość
+  showSection('identity');
+});
+
+function showSection(sectionId) {
+  const sections = document.querySelectorAll('.section');
+  sections.forEach(section => section.style.display = 'none');
+
+  document.getElementById(sectionId).style.display = 'block';
 }
